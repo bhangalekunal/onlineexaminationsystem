@@ -1,28 +1,28 @@
 export const MENU_ITEMS: any[] = [
     {
-      title: 'Home',
-      icon: 'fas fa-home',
-      link: '/pages/dashboard',
-      home: true,
-    },
-    {
-      title: 'Dashboard',
-      icon: 'fas fa-tachometer-alt',
-      link: '/pages/iot-dashboard',
-    },
-    {
       title: 'Basic Data',
       icon: 'fas fa-table',
       children: [
         {
+          title: 'Home',
+          icon: 'fa fa-home',
+          link: 'dashboard',
+          home: true,
+        },
+        {
+          title: 'Dashboard',
+          icon: 'fa fa-tachometer',
+          link: 'dashboard',
+        },
+        {
           title: 'Department',
-          icon: 'fas fa-building',
-          link: '/pages/layout/stepper',
+          icon: 'fa fa-building',
+          link: 'department',
         },
         {
           title: 'Subject',
-          icon: 'fas fa-book',
-          link: '/pages/layout/list',
+          icon: 'fa fa-book',
+          link: 'dashboard',
         }
       ],
     }

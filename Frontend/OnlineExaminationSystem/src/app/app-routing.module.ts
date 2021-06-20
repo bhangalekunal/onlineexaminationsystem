@@ -7,6 +7,16 @@ const routes: Routes = [
     loadChildren: () => import('./auth/auth.module')
       .then(m => m.AuthModule),
   },
+  {
+    path: 'pages',
+    loadChildren: () => import('./pages/pages.module')
+      .then(m => m.PagesModule),
+  },
+  {
+    path: 'sidenav',
+    loadChildren: () => import('./sidenav/sidenav.module')
+      .then(m => m.SidenavModule),
+  },
   { path: '', redirectTo: 'auth', pathMatch: 'full' },
   { path: '**', redirectTo: 'auth' },
 ];
