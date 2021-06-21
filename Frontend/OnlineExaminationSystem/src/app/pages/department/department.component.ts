@@ -6,6 +6,24 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./department.component.css']
 })
 export class DepartmentComponent implements OnInit {
+  searchString: string = "";
+  searchField: string = "departmentCode";
+ 
+
+  fields: any[] = [
+    {
+      displayValue: 'Department Code',
+      actualValue: 'departmentCode'
+    },
+    {
+      displayValue: 'Department Name',
+      actualValue: 'departmentName'
+    },
+    {
+      displayValue: 'Status',
+      actualValue: 'status'
+    }
+  ];
 
   departments: any[]= [
     {
