@@ -7,6 +7,23 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DepartmentComponent implements OnInit {
 
+  departments: any[]= [
+    {
+      departmentCode: 'CS',
+      departmentName: 'Computer Engineering',
+      status: 'ACTIVE'
+    },
+    {
+      departmentCode: 'ME',
+      departmentName: 'Mecanical Engineering',
+      status: 'ACTIVE'
+    },
+    {
+      departmentCode: 'CE',
+      departmentName: 'Civil Engineering',
+      status: 'ACTIVE'
+    }
+  ];
   constructor() { }
 
   ngOnInit(): void {

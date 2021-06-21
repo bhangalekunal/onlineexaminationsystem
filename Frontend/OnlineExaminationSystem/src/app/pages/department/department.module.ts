@@ -15,3 +15,4 @@ import { DepartmentComponent } from './department.component';
   ]
 })
 export class DepartmentModule { }
+
