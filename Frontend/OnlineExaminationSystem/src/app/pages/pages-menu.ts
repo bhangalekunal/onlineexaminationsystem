@@ -5,23 +5,23 @@ export const MENU_ITEMS: any[] = [
       children: [
         {
           title: 'Home',
-          icon: 'fa fa-home',
+          icon: 'fas fa-home',
           link: 'dashboard',
           home: true,
         },
         {
           title: 'Dashboard',
-          icon: 'fa fa-tachometer',
+          icon: 'fas fa-tachometer-alt',
           link: 'dashboard',
         },
         {
           title: 'Department',
-          icon: 'fa fa-building',
+          icon: 'fas fa-building',
           link: 'department',
         },
         {
           title: 'Subject',
-          icon: 'fa fa-book',
+          icon: 'fas fa-book',
           link: 'dashboard',
         }
       ],

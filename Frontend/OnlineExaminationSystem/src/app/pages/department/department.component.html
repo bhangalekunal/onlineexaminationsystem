@@ -1,36 +1,30 @@
 <div class="container-fluid pt-2">
-    <div class="d-grid gap-3">
-        <!-- <div class="input-group flex-nowrap">
-            <span class="input-group-text" id="addon-wrapping"><i class="fa fa-search"></i></span>
-            <input type="text" class="form-control" placeholder="type to search.." aria-label="Username" aria-describedby="addon-wrapping" [(ngModel)]="searchString">
-        </div> -->
+  <div class="d-grid gap-3">
 
-        <div class="input-group mb-3">
-          <select class="form-select" aria-label="Default select example" [(ngModel)]="searchField">
-            <option *ngFor="let field of fields" [value]="field.actualValue">{{field.displayValue}}</option>
-          </select>
-          <input type="text" class="form-control" aria-label="Text input with dropdown button" placeholder="type to search.." [(ngModel)]="searchString">
-        </div>
-        {{searchField | json}}
-        <table class="table table-striped table-hover">
-            <thead>
-                <tr>
-                  <th scope="col">Sr.No</th>
-                  <th scope="col">Department Code</th>
-                  <th scope="col">Department Name</th>
-                  <th scope="col">Status</th>
-                </tr>
-              </thead>
-              <tbody>
-                <tr *ngFor="let department of departments | filter : searchField : searchString; let i = index" [attr.data-index]="i">
-                  <th scope="row">{{i+1}}</th>
-                  <td>{{department.departmentCode}}</td>
-                  <td>{{department.departmentName}}</td>
-                  <td>{{department.status}}</td>
-                </tr>
-              </tbody>
-        </table>
+    <div class="basicbuttons d-flex justify-content-end">
+      <div class="row">
+          <div>
+            <app-filter-fields [fieldNames]='fields' (filterItemEvent)="isFilterChange($event)"></app-filter-fields>
+          </div>
+      </div>
     </div>
-    
-</div>
-  
+    <table class="table table-striped table-hover">
+      <thead>
+        <tr>
+          <th scope="col">Sr.No</th>
+          <th scope="col">Department Code</th>
+          <th scope="col">Department Name</th>
+          <th scope="col">Status</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr *ngFor="let department of departments | filter : searchField : searchString; let i = index"
+          [attr.data-index]="i">
+          <th scope="row">{{i+1}}</th>
+          <td>{{department.departmentCode}}</td>
+          <td>{{department.departmentName}}</td>
+          <td>{{department.status}}</td>
+        </tr>
+      </tbody>
+    </table>
+  </div>

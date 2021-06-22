@@ -7,7 +7,7 @@ import { Component, OnInit } from '@angular/core';
 })
 export class DepartmentComponent implements OnInit {
   searchString: string = "";
-  searchField: string = "departmentCode";
+  searchField: string = "";
  
 
   fields: any[] = [
@@ -47,4 +47,8 @@ export class DepartmentComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  isFilterChange(event:any) {
+    this.searchField = event.searchFieldName;
+    this.searchString = event.searchFieldValue;
+  }
 }
