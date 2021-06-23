@@ -9,7 +9,9 @@ import { MENU_ITEMS } from './pages-menu';
 export class PagesComponent implements OnInit {
   menu = MENU_ITEMS;
   isOpened: boolean = false;
-  constructor() { }
+  constructor() {
+   
+   }
 
   ngOnInit(): void {
   }
