@@ -1,0 +1,41 @@
+<div class="filter-popup">
+    <form #filterPage = "ngForm" (ngSubmit) = "onClickSubmit(filterPage.value)" >
+    <!-- Button trigger modal Start -->
+    <button type="button" class="btn btn-secondary" data-bs-toggle="modal" data-bs-target="#exampleModal">
+        <div data-bs-toggle="tooltip" data-bs-placement="top" title="filter">
+            <i class="fa fa-filter"></i>
+        </div>
+    </button>
+    <!-- Button trigger modal End -->
+    <!-- Modal Start-->
+    <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title fs-4" id="exampleModalLabel">Filter Table</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <select class="form-select" aria-label="Default select example" name="selectbox" ngModel>
+                            <option value="" selected hidden>Select Field...</option>
+                            <option *ngFor="let field of fieldNames" [value]="field.actualFieldName">{{field.displayFieldName}}</option>
+                        </select>
+                    </div>
+                    <div class="mb-3">
+                        <input type="text"  class="form-control" name = "searchbox" aria-label="Text input with dropdown button"
+                            placeholder="type to search.." ngModel>
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" data-bs-toggle="tooltip" data-bs-placement="top" title="close"><i class="fas fa-window-close"></i></button>
+                    <button type="submit" class="btn btn-primary" data-bs-toggle="tooltip" data-bs-placement="top" title="search"><i class="fas fa-search"></i></button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal End-->
+
+</form>
+</div>

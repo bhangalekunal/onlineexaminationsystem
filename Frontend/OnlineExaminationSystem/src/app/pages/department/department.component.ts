@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { FieldDetails } from 'src/app/basicmodels/FieldDetails';
 
 @Component({
   selector: 'app-department',
@@ -10,18 +11,18 @@ export class DepartmentComponent implements OnInit {
   searchField: string = "";
  
 
-  fields: any[] = [
+  fields: FieldDetails[] = [
     {
-      displayValue: 'Department Code',
-      actualValue: 'departmentCode'
+      displayFieldName: 'Department Code',
+      actualFieldName: 'departmentCode'
     },
     {
-      displayValue: 'Department Name',
-      actualValue: 'departmentName'
+      displayFieldName: 'Department Name',
+      actualFieldName: 'departmentName'
     },
     {
-      displayValue: 'Status',
-      actualValue: 'status'
+      displayFieldName: 'Status',
+      actualFieldName: 'status'
     }
   ];
 
