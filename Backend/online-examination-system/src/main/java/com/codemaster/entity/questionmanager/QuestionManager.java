@@ -63,6 +63,6 @@ public class QuestionManager {
     private String departmentCode;
 
     @NotNull(message = "status can not be null")
-    @Column(name = "STATUS",length = 30, nullable = false)
+    @Column(name = "STATUS",length = 50, nullable = false)
     private String status;
 }
