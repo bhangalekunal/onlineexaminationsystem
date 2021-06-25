@@ -29,6 +29,6 @@ public class Subject {
     private String decription;
 
     @NotNull(message = "status cannot be null")
-    @Column(name = "status",length = 50,nullable = false)
+    @Column(name = "STATUS",length = 50,nullable = false)
     private String status;
 }

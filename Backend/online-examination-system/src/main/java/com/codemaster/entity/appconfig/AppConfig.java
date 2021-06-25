@@ -23,10 +23,10 @@ public class AppConfig {
     private String keyName;
 
     @NotNull(message = "value can not be null")
-    @Column(name = "VALUE",length = 100,unique = false,nullable = false)
+    @Column(name = "VALUE",length = 100,nullable = false)
     private String value;
 
     @NotNull(message = "status can not be null")
-    @Column(name = "STATUS",length = 50,unique = false,nullable = false)
+    @Column(name = "STATUS",length = 50,nullable = false)
     private String status;
 }
