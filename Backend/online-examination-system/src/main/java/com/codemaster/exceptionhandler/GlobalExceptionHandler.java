@@ -98,6 +98,17 @@ public class GlobalExceptionHandler extends ResponseEntityExceptionHandler {
     }
 
     /*
+        InvalidInputException triggered when invalid inputes passed to method
+    */
+
+    @ExceptionHandler(InvalidInputException.class)
+    protected ResponseEntity<Object> handleInvalidInputException(InvalidInputException ex,WebRequest webRequest)
+    {
+        ErrorDetails errorDetails = new ErrorDetails(HttpStatus.BAD_REQUEST,ex.getMessage(),webRequest.getDescription(false));
+        return new ResponseEntity<Object>(errorDetails, new HttpHeaders(), errorDetails.getStatus());
+    }
+
+    /*
         Handle HttpMessageNotReadableException. Happens when request JSON is malformed.
      */
 
