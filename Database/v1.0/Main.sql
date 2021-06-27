@@ -7,8 +7,6 @@ ALTER SESSION SET "_ORACLE_SCRIPT"=true;
 
 ALTER SESSION SET CURRENT_SCHEMA=OES;
 
---DDL Scripts
-@commands\DDL\DDL_1.sql;
 
 --DML Scripts
 
