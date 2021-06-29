@@ -9,5 +9,5 @@ import java.util.List;
 
 public interface DepartmentRepository extends JpaRepository<Department, String> {
     @Query("SELECT d FROM Department d WHERE d.departmentCode = ?1 and d.status = 'ENABLED'")
-    List<Department> findByDepartmentCode(@Param("departmentCode") String departmentCode);
+    Department findByDepartmentCode(@Param("departmentCode") String departmentCode);
 }

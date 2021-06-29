@@ -13,7 +13,7 @@ import java.util.List;
 import java.util.Map;
 
 @RestController
-@RequestMapping("/api/v1/")
+@RequestMapping("/api/v1")
 public class AppConfigController {
 
     @Autowired
@@ -36,13 +36,13 @@ public class AppConfigController {
 
         if(appConfig == null)
         {
-            throw new EntityNotFoundException("AppCongig not found for kayname: "+keyName);
+            throw new EntityNotFoundException("AppConfig not found for kayname: "+keyName);
         }
         return ResponseEntity.ok().body(appConfig);
     }
 
     @PostMapping("/appConfigs")
-    public ResponseEntity<AppConfig> createAppConfig(@Valid @RequestHeader AppConfig appConfig)
+    public ResponseEntity<AppConfig> createAppConfig(@Valid @RequestBody AppConfig appConfig)
     {
         return ResponseEntity.ok().body(appConfigService.addAppConfig(appConfig));
     }

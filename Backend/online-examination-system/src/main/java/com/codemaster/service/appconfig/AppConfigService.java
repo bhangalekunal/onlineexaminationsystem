@@ -39,7 +39,8 @@ public class AppConfigService {
 
         appConfig.setValue(appConfigDetails.getValue());
         appConfig.setStatus(appConfigDetails.getStatus());
-        return appConfig;
+        final AppConfig updatedAppConfig = appConfigRepository.save(appConfig);
+        return updatedAppConfig;
     }
 
     public Map<String, Boolean> deleteAppConfig(String keyName) throws EntityNotFoundException
