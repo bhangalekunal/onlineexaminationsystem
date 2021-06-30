@@ -4,6 +4,9 @@
     <div class="basicbuttons d-flex justify-content-end">
       <div class="row">
           <div class="col">
+            <app-create-profile-button></app-create-profile-button>
+          </div>
+          <div class="col">
             <app-filter-fields [fieldNames]='fields' (filterItemEvent)="isFilterChange($event)"></app-filter-fields>
           </div>
       </div>

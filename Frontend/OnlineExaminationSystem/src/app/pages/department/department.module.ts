@@ -5,12 +5,14 @@ import { DepartmentRoutingModule } from './department-routing.module';
 import { FilterPipe } from '../filterpipes/filter-pipe.pipe'
 import { DepartmentComponent } from './department.component';
 import { FilterFieldsComponent } from '../filter-fields/filter-fields.component';
+import { CreateProfileButtonComponent } from '../create-profile-button/create-profile-button.component';
 
 @NgModule({
   declarations: [
     DepartmentComponent,
     FilterPipe,
-    FilterFieldsComponent
+    FilterFieldsComponent,
+    CreateProfileButtonComponent
   ],
   imports: [
     CommonModule,
