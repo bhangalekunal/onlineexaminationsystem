@@ -6,13 +6,16 @@ import { FilterPipe } from '../filterpipes/filter-pipe.pipe'
 import { DepartmentComponent } from './department.component';
 import { FilterFieldsComponent } from '../filter-fields/filter-fields.component';
 import { CreateProfileButtonComponent } from '../create-profile-button/create-profile-button.component';
+import { RefreshProfileButtonComponent } from '../refresh-profile-button/refresh-profile-button.component';
+
 
 @NgModule({
   declarations: [
     DepartmentComponent,
     FilterPipe,
     FilterFieldsComponent,
-    CreateProfileButtonComponent
+    CreateProfileButtonComponent,
+    RefreshProfileButtonComponent
   ],
   imports: [
     CommonModule,

@@ -7,6 +7,9 @@
             <app-create-profile-button></app-create-profile-button>
           </div>
           <div class="col">
+            <app-refresh-profile-button></app-refresh-profile-button>
+          </div>
+          <div class="col">
             <app-filter-fields [fieldNames]='fields' (filterItemEvent)="isFilterChange($event)"></app-filter-fields>
           </div>
       </div>

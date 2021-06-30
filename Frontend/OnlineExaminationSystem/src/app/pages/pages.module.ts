@@ -6,9 +6,6 @@ import { PagesComponent } from './pages.component';
 
 
 
-
-
-
 @NgModule({
   declarations: [
     PagesComponent,
