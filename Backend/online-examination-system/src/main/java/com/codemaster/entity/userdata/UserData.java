@@ -1,23 +1,23 @@
-package com.codemaster.entity.userdetails;
+package com.codemaster.entity.userdata;
 
 import com.codemaster.entity.role.Role;
+import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
-import java.util.HashSet;
-import java.util.Set;
 import java.util.TimeZone;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "USERDETAILS")
-public class UserDetails {
-
+@Table(name = "USERDATA")
+public class UserData {
     @Id
     @NotNull(message = "userName cannot be null")
     @Column(name = "USERNAME",length = 50,unique = true,nullable = false)
@@ -44,22 +44,31 @@ public class UserDetails {
     private String email;
 
     @NotNull(message = "isFistTime cannot be null")
-    @Column(name = "ISFIRSTTIME",columnDefinition = "NUMBER(1,0)",nullable = false)
+    @Column(name = "ISFIRSTTIME",nullable = false)
+    @JsonProperty
     private boolean isFistTime;
 
     @NotNull(message = "timezone cannot be null")
     @Column(name = "TIMEZONE",nullable = false)
     private TimeZone timezone;
 
-    @NotNull(message = "active cannot be null")
-    @Column(name = "ACTIVE",columnDefinition = "NUMBER(1,0)",nullable = false)
-    private boolean active;
+    @NotNull(message = "isActive cannot be null")
+    @Column(name = "ISACTIVE",nullable = false)
+    @JsonProperty
+    private boolean isActive;
 
-    @ManyToMany(cascade = CascadeType.ALL, fetch = FetchType.EAGER)
-    @JoinTable(
-            name = "USERROLEASSIGNMENT",
-            joinColumns = @JoinColumn(name = "USERNAME"),
-            inverseJoinColumns = @JoinColumn(name = "ROLEID")
-    )
-    private Set<Role> roles = new HashSet<>();
+    @NotNull(message = "isNotLocked cannot be null")
+    @Column(name = "ISNOTLOCKED",nullable = false)
+    @JsonProperty
+    private boolean isNotLocked;
+
+    @Column(name = "PROFILEIMAGEURL")
+    private String profileImageUrl;
+
+    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+    @JoinColumn(name = "ROLEID", nullable = false)
+    @JsonBackReference
+    private Role roleId;
+
+
 }

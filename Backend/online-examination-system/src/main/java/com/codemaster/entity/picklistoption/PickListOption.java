@@ -18,15 +18,12 @@ public class PickListOption {
 
     @Id
     @NotNull(message = "listOptionId cannot be null")
-    @Column(name = "LISTOPTIONID",length = 50,unique = true,nullable = false)
+    @Column(name = "LISTOPTIONID",length = 36,unique = true,nullable = false)
     private String listOptionId;
 
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
-    @JoinColumn(name = "LISTID", nullable = false)
+    @JoinColumn(name = "LISTNAME", nullable = false)
     private PickList pickList;
-
-    @Column(name = "OPTIONNAME",length = 50)
-    private String optionName;
 
     @NotNull(message = "optionValue cannot be null")
     @Column(name = "OPTIONVALUE",length = 50,nullable = false)

@@ -1,8 +1,9 @@
-package com.codemaster.nonpersistanceentity;
+package com.codemaster.entity.nonpersistance;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
 import javax.validation.constraints.NotNull;
 
 @Data

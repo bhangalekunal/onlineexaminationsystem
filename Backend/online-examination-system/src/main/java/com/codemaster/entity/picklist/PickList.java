@@ -18,12 +18,8 @@ import java.util.Set;
 public class PickList {
 
     @Id
-    @NotNull(message = "listId cannot be null")
-    @Column(name = "LISTID",length = 50,unique = true,nullable = false)
-    private String listId;
-
     @NotNull(message = "listName cannot be null")
-    @Column(name = "LISTNAME",length = 50,unique = true)
+    @Column(name = "LISTNAME",length = 50,unique = true,nullable = false)
     private String listName;
 
     @Column(name = "DESCRIPTION",length = 50 )

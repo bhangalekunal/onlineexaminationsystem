@@ -1,19 +1,20 @@
 package com.codemaster.entity.role;
 
-import lombok.*;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import com.codemaster.entity.privilege.Privilege;
+import com.codemaster.entity.userdata.UserData;
+import com.fasterxml.jackson.annotation.JsonManagedReference;
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+import javax.persistence.*;
 import javax.validation.constraints.NotNull;
-import javax.validation.constraints.Size;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
-@Getter
-@Setter
 @Entity
 @Table(name = "ROLE")
 public class Role {
@@ -31,5 +32,17 @@ public class Role {
     private String status;
 
 
+    @OneToMany(mappedBy = "roleId", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private List<UserData> userDataSet;
+
+    @ManyToMany
+    @JoinTable(
+            name = "ROLEPRIVILIGEASSIGNMENT",
+            joinColumns = @JoinColumn(
+                    name = "ROLEID", referencedColumnName = "ROLEID"),
+            inverseJoinColumns = @JoinColumn(
+                    name = "PRIVILEGEID", referencedColumnName = "PRIVILEGEID"))
+    private List<Privilege> privileges;
 
 }
