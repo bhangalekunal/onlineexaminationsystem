@@ -8,6 +8,6 @@ import org.springframework.data.repository.query.Param;
 import java.util.List;
 
 public interface FieldDetailsRepository extends JpaRepository<FieldDetails, String> {
-    @Query("SELECT f FROM FieldDetails f WHERE f.className = ?1 and f.status = 'ENABLED'")
+    @Query("SELECT f FROM FieldDetails f WHERE f.className = ?1 and f.status = 'ACTIVE'")
     List<FieldDetails> findByClassName(@Param("className") String className);
 }

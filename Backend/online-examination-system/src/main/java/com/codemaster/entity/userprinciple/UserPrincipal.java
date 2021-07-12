@@ -23,7 +23,7 @@ public class UserPrincipal implements UserDetails {
     public Collection<? extends GrantedAuthority> getAuthorities() {
         //return stream(this.userData.getAuthorities()).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 
-        List<String> priviliges = this.userData.getRoleId().getPrivileges().stream().map(privilege ->
+        List<String> priviliges = this.userData.getRole().getPrivileges().stream().map(privilege ->
                 String.format("%s:%s",privilege.getResourceName(),privilege.getOperation())).collect(Collectors.toList());
         return priviliges.stream().map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 

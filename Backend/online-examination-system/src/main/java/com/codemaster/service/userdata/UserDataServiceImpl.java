@@ -117,7 +117,7 @@ public class UserDataServiceImpl implements UserDataService, UserDetailsService 
         userData.setProfileImageUrl(getTemporaryProfileImageUrl());
 
         Role role = roleService.getRoleByRoleId("ADMIN");
-        userData.setRoleId(role);
+        userData.setRole(role);
         //System.out.println("USERDATA:---->"+userData.toString());
         List<UserData> userDataList = new ArrayList<>();
         userDataList.add(userData);

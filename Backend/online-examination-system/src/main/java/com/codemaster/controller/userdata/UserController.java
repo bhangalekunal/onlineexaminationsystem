@@ -1,5 +1,6 @@
 package com.codemaster.controller.userdata;
 
+import com.codemaster.entity.nonpersistance.AuthRequest;
 import com.codemaster.entity.userdata.UserData;
 import com.codemaster.entity.userprinciple.UserPrincipal;
 import com.codemaster.exceptionhandler.domain.*;
@@ -33,9 +34,9 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserData> login(@RequestBody UserData userData) {
-        authenticate(userData.getUserName(), userData.getPassword());
-        UserData loginUserData = userDataService.findUserDataByUsername(userData.getUserName());
+    public ResponseEntity<UserData> login(@RequestBody AuthRequest authRequest) {
+        authenticate(authRequest.getUserName(), authRequest.getPassword());
+        UserData loginUserData = userDataService.findUserDataByUsername(authRequest.getUserName());
         UserPrincipal userPrincipal = new UserPrincipal(loginUserData);
         HttpHeaders jwtHeader = getJwtHeader(userPrincipal);
         return new ResponseEntity<>(loginUserData, jwtHeader, OK);

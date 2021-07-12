@@ -7,6 +7,6 @@ import org.springframework.data.repository.query.Param;
 
 public interface RoleRepository extends JpaRepository<Role,String> {
 
-    @Query("SELECT r FROM Role r WHERE r.roleId = ?1 and r.status = 'ENABLED'")
+    @Query("SELECT r FROM Role r WHERE r.roleId = ?1 and r.status = 'ACTIVE'")
     Role findByRoleId(@Param("roleId") String roleId);
 }

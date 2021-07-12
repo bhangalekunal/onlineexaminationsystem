@@ -68,7 +68,7 @@ public class UserData {
     @ManyToOne(fetch = FetchType.LAZY, optional = false)
     @JoinColumn(name = "ROLEID", nullable = false)
     @JsonBackReference
-    private Role roleId;
+    private Role role;
 
 
 }
