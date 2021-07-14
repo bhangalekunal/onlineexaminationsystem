@@ -15,6 +15,7 @@ import org.springframework.security.authentication.UsernamePasswordAuthenticatio
 import org.springframework.web.bind.annotation.*;
 
 import javax.mail.MessagingException;
+import javax.validation.Valid;
 
 import static com.codemaster.constant.SecurityConstant.JWT_TOKEN_HEADER;
 import static org.springframework.http.HttpStatus.OK;
@@ -34,7 +35,7 @@ public class UserController {
     }
 
     @PostMapping("/login")
-    public ResponseEntity<UserData> login(@RequestBody AuthRequest authRequest) {
+    public ResponseEntity<UserData> login(@Valid @RequestBody AuthRequest authRequest) {
         authenticate(authRequest.getUserName(), authRequest.getPassword());
         UserData loginUserData = userDataService.findUserDataByUsername(authRequest.getUserName());
         UserPrincipal userPrincipal = new UserPrincipal(loginUserData);
@@ -43,7 +44,7 @@ public class UserController {
     }
 
     @PostMapping("/register")
-    public ResponseEntity<UserData> register(@RequestBody UserData userData) throws UserNotFoundException, UsernameExistException, EmailExistException, MessagingException {
+    public ResponseEntity<UserData> register(@RequestBody UserData userData) throws UserNotFoundException, UsernameExistException, EmailExistException, MessagingException, NoActiveRoleFoundException {
         UserData newUserData = userDataService.register(userData);
         return new ResponseEntity<>(newUserData, OK);
     }

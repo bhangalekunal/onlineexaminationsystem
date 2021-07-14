@@ -90,6 +90,18 @@ public class ExceptionHandling{
         return createHttpResponse(HttpStatus.BAD_REQUEST,exception.getMessage());
     }
 
+    @ExceptionHandler(NoActiveRoleFoundException.class)
+    public ResponseEntity<HttpResponse> noActiveRoleFoundException(NoActiveRoleFoundException exception)
+    {
+        return createHttpResponse(HttpStatus.NOT_FOUND, exception.getMessage());
+    }
+
+    @ExceptionHandler(InvalidInputException.class)
+    public ResponseEntity<HttpResponse> invalidInputException(InvalidInputException exception)
+    {
+        return createHttpResponse(HttpStatus.BAD_REQUEST, exception.getMessage());
+    }
+
 
     @ExceptionHandler(NoHandlerFoundException.class)
     public ResponseEntity<HttpResponse> noHandlerFoundException(NoHandlerFoundException exception)

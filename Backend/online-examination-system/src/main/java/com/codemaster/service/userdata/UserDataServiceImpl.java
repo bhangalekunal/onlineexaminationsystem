@@ -4,6 +4,7 @@ import com.codemaster.entity.role.Role;
 import com.codemaster.entity.userdata.UserData;
 import com.codemaster.entity.userprinciple.UserPrincipal;
 import com.codemaster.exceptionhandler.domain.EmailExistException;
+import com.codemaster.exceptionhandler.domain.NoActiveRoleFoundException;
 import com.codemaster.exceptionhandler.domain.UsernameExistException;
 import com.codemaster.repository.userdata.UserDataRepository;
 import com.codemaster.service.emailservice.EmailService;
@@ -105,7 +106,7 @@ public class UserDataServiceImpl implements UserDataService, UserDetailsService 
 
 
     @Override
-    public UserData register(UserData userData) throws EmailExistException, UsernameExistException, MessagingException {
+    public UserData register(UserData userData) throws EmailExistException, UsernameExistException, MessagingException, NoActiveRoleFoundException {
         validateNewUsernameAndEmail(userData);
 
         String origionalPassword = userData.getPassword();
