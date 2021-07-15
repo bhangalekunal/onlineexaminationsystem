@@ -4,14 +4,16 @@ import { environment } from '../../../environments/environment';
 import { Observable } from 'rxjs';
 import { AuthRequest } from '../../basicmodels/AuthRequest';
 import { UserData } from '../../basicmodels/UserData';
+import { JwtHelperService } from "@auth0/angular-jwt";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-  private host: string = environment.apiUrl;
+  public host: string = environment.apiUrl;
   private token: string;
   private loggedInUserName: string;
+  private jwtHelper = new JwtHelperService();
 
   constructor(private http: HttpClient) { }
 
@@ -36,20 +38,52 @@ export class AuthenticationService {
 
   }
 
-  public saveToken(token: string): void
-  {
-    this.token = token;
-    localStorage.setItem('token',token);
-  }
+    public saveToken(token: string): void
+    {
+      this.token = token;
+      localStorage.setItem('token',token);
+    }
 
-  public addUserToLocalCache(userData: UserData): void
-  {
-    localStorage.setItem('user',JSON.stringify(userData));
-  }
+    public addUserToLocalCache(userData: UserData): void
+    {
+      localStorage.setItem('user',JSON.stringify(userData));
+    }
 
-  public getUserFromLocalCache(): UserData
-  {
-    return JSON.parse(localStorage.getItem('user'));
-  }
+    public getUserFromLocalCache(): UserData
+    {
+      return JSON.parse(localStorage.getItem('user'));
+    }
+
+    public loadToken(): void
+    {
+      this.token = localStorage.getItem('token');
+    }
+
+    public getToken(): string
+    {
+      return this.token;
+    }
+
+    public isLoggedIn(): boolean
+    {
+        this.loadToken();
+        if(this.token != null && this.token !== '')
+        {
+          if(this.jwtHelper.decodeToken(this.token).sub != null || '')
+          {
+              if(!this.jwtHelper.isTokenExpired(this.token))
+              {
+                this.loggedInUserName = this.jwtHelper.decodeToken(this.token).sub;
+                return true;
+              }
+          }
+        }
+        else
+        {
+          this.logOut();
+          return false;
+        }
+        return false;
+    }
 
 }

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import javax.persistence.*;
 import javax.validation.constraints.Email;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.TimeZone;
 
 @Data
@@ -17,7 +18,7 @@ import java.util.TimeZone;
 @NoArgsConstructor
 @Entity
 @Table(name = "USERDATA")
-public class UserData {
+public class UserData implements Serializable {
     @Id
     @NotNull(message = "userName cannot be null")
     @Column(name = "USERNAME",length = 50,unique = true,nullable = false)
