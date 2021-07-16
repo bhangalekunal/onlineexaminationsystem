@@ -6,6 +6,9 @@ import { FormsModule } from '@angular/forms'
 import { AppComponent } from './app.component';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
 import { HttpClientModule } from '@angular/common/http';
+import { AuthenticationService } from './service/authentication/authentication.service';
+import { UserService } from './service/user/user.service';
+import { AuthenticationGuard } from './guard/authentication.guard';
 
 @NgModule({
   declarations: [
@@ -18,7 +21,7 @@ import { HttpClientModule } from '@angular/common/http';
     FormsModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [AuthenticationGuard, AuthenticationService, UserService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
