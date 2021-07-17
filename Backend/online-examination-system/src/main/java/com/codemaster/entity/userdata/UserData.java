@@ -2,6 +2,7 @@ package com.codemaster.entity.userdata;
 
 import com.codemaster.entity.role.Role;
 import com.fasterxml.jackson.annotation.JsonBackReference;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonProperty;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -66,9 +67,10 @@ public class UserData implements Serializable {
     @Column(name = "PROFILEIMAGEURL")
     private String profileImageUrl;
 
-    @ManyToOne(fetch = FetchType.LAZY, optional = false)
+
+    @ManyToOne(fetch = FetchType.EAGER, optional = false)
     @JoinColumn(name = "ROLEID", nullable = false)
-    @JsonBackReference
+    @JsonIgnoreProperties("userDataSet")
     private Role role;
 
 

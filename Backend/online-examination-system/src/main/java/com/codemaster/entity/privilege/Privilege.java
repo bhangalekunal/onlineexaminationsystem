@@ -2,6 +2,7 @@ package com.codemaster.entity.privilege;
 
 
 import com.codemaster.entity.role.Role;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
@@ -28,6 +29,7 @@ public class Privilege {
     private String operation;
 
     @ManyToMany(mappedBy = "privileges")
+    @JsonIgnoreProperties("privileges")
     private List<Role> roles;
 
 }

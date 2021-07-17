@@ -117,14 +117,9 @@ public class UserDataServiceImpl implements UserDataService, UserDetailsService 
         userData.setNotLocked(true);
         userData.setProfileImageUrl(getTemporaryProfileImageUrl());
 
-        Role role = roleService.getRoleByRoleId("ADMIN");
-        userData.setRole(role);
         //System.out.println("USERDATA:---->"+userData.toString());
-        List<UserData> userDataList = new ArrayList<>();
-        userDataList.add(userData);
-        //role.setUserDataSet(userDataList);
-        //roleService.addRole(role);
-        //userDataRepository.save(userData);
+        Role role = roleService.getRoleByRoleId(userData.getRole().getRoleId());
+        userData.setRole(role);
         emailService.sendNewPasswordEmail(userData.getFirstName(), origionalPassword, userData.getEmail());
         LOGGER.info("New user password: " + userData.getPassword());
         return userDataRepository.save(userData);

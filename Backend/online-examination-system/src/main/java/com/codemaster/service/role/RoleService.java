@@ -28,4 +28,11 @@ public class RoleService {
     {
         return roleRepository.save(role);
     }
+
+
+    public Role getRoleForGrantAuthorityByRoleId(String roleId){
+        System.out.println("DEBUG ROLE--->");
+        Role role = roleRepository.findByRoleId(roleId);
+        return role;
+    }
 }

@@ -3,6 +3,7 @@ package com.codemaster.entity.role;
 
 import com.codemaster.entity.privilege.Privilege;
 import com.codemaster.entity.userdata.UserData;
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -10,6 +11,7 @@ import lombok.NoArgsConstructor;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import java.io.Serializable;
 import java.util.List;
 
 @Data
@@ -32,9 +34,10 @@ public class Role {
     private String status;
 
 
-    @OneToMany(mappedBy = "role", fetch = FetchType.LAZY, cascade = CascadeType.ALL)
-    @JsonManagedReference
+    @OneToMany(mappedBy = "role", fetch = FetchType.EAGER, cascade = CascadeType.ALL)
+    @JsonIgnoreProperties("role")
     private List<UserData> userDataSet;
+
 
     @ManyToMany
     @JoinTable(
@@ -43,6 +46,7 @@ public class Role {
                     name = "ROLEID", referencedColumnName = "ROLEID"),
             inverseJoinColumns = @JoinColumn(
                     name = "PRIVILEGEID", referencedColumnName = "PRIVILEGEID"))
+    @JsonIgnoreProperties("roles")
     private List<Privilege> privileges;
 
 }

@@ -17,15 +17,15 @@ export class AuthenticationService {
 
   constructor(private http: HttpClient) { }
 
-  public login(authRequest: AuthRequest): Observable<HttpResponse<any> | HttpErrorResponse>
+  public login(authRequest: AuthRequest): Observable<HttpResponse<UserData>>
   {
-      return this.http.post<HttpResponse<any> | HttpErrorResponse>
+      return this.http.post<UserData>
       (`${this.host}/api/user/login`, authRequest, {observe: 'response'});
   }
 
-  public register(userData: UserData): Observable<UserData | HttpErrorResponse>
+  public register(userData: UserData): Observable<UserData>
   {
-      return this.http.post<UserData | HttpErrorResponse>
+      return this.http.post<UserData>
       (`${this.host}/api/user/register`, userData);
   }
 

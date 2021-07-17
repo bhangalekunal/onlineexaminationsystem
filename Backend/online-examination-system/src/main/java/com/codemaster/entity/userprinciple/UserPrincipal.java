@@ -1,7 +1,10 @@
 package com.codemaster.entity.userprinciple;
 
+import com.codemaster.entity.role.Role;
 import com.codemaster.entity.userdata.UserData;
 import com.codemaster.service.privilige.PriviligeService;
+import com.codemaster.service.role.RoleService;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
@@ -13,15 +16,15 @@ import java.util.stream.Collectors;
 public class UserPrincipal implements UserDetails {
     private UserData userData;
 
-    private PriviligeService priviligeService;
+
 
     public UserPrincipal(UserData userData) {
         this.userData = userData;
     }
 
+
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        //return stream(this.userData.getAuthorities()).map(SimpleGrantedAuthority::new).collect(Collectors.toList());
 
         List<String> priviliges = this.userData.getRole().getPrivileges().stream().map(privilege ->
                 String.format("%s:%s",privilege.getResourceName(),privilege.getOperation())).collect(Collectors.toList());

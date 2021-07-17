@@ -21,7 +21,7 @@ import static com.codemaster.constant.SecurityConstant.JWT_TOKEN_HEADER;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
-@RequestMapping("/api/v1/user")
+@RequestMapping("/api/user")
 public class UserController {
     private AuthenticationManager authenticationManager;
     private UserDataService userDataService;
