@@ -9,6 +9,7 @@ private timezone: string;
 private isActive: boolean;
 private isNotLocked: boolean;
 private profileImageUrl: string;
+private role: any;
 
     constructor(){
         this.userName = '';

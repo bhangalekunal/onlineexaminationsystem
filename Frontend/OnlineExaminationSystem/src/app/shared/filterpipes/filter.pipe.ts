@@ -1,15 +1,9 @@
-import { Pipe, PipeTransform, Injectable } from '@angular/core';
+import { Pipe, PipeTransform } from '@angular/core';
 
 @Pipe({
   name: 'filter'
 })
-
-@Injectable()
 export class FilterPipe implements PipeTransform {
-
-  // transform(value: unknown, ...args: unknown[]): unknown {
-  //   return null;
-  // }
 
   transform(items: any[], field: string, value: string): any[] {
     if (!items) {

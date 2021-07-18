@@ -23,6 +23,7 @@
           <th scope="col">Status</th>
         </tr>
       </thead>
+      
       <tbody>
         <tr *ngFor="let department of departments | filter : searchField : searchString; let i = index"
           [attr.data-index]="i">

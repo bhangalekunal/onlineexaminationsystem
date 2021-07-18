@@ -1,4 +1,4 @@
-import { Component, OnInit, Input, Output, EventEmitter } from '@angular/core';
+import { Component, EventEmitter, Input, OnInit, Output } from '@angular/core';
 import { FieldDetails } from 'src/app/basicmodels/FieldDetails';
 
 @Component({
@@ -7,12 +7,9 @@ import { FieldDetails } from 'src/app/basicmodels/FieldDetails';
   styleUrls: ['./filter-fields.component.css']
 })
 export class FilterFieldsComponent implements OnInit {
-
-  
   @Input('fieldNames') fieldNames: FieldDetails[]=[];
   @Output() filterItemEvent = new EventEmitter<object>();
-  constructor() {
-   }
+  constructor() { }
 
   ngOnInit(): void {
   }
