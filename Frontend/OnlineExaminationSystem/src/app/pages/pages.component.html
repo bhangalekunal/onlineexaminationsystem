@@ -21,7 +21,7 @@
             <div class="accordion-body">
                 <ul class="nav flex-column bg-white mb-0">
                     <li class="nav-item" *ngFor="let child of item.children">
-                      <a routerLink="{{child.link}}" class="nav-link text-dark bg-light">
+                      <a routerLink="{{child.link}}" class="nav-link text-dark bg-light" (click)="changeTitle(item.title,child.title)">
                         <i class="{{child.icon}}" aria-hidden="true"></i>
                         {{child.title}}
                       </a>
@@ -84,6 +84,20 @@
       </nav>
       <!-- NavBar End -->
       
+      <!-- Breadcrumb Start -->
+      <div class="container-fluid">
+        <div class="row mt-2">
+          <div class="col-md-12">
+            <nav aria-label="breadcrumb" class="bg-light bg-gradient">
+              <ol class="breadcrumb" *ngIf="titleAction$ | async as title">
+                <li class="breadcrumb-item"><a href="#" class="text-dark">{{ title.headingTitle }}</a><i class="fas fa-angle-double-right mx-2"></i></li>
+                <li class="breadcrumb-item active" aria-current="page">{{ title.childTitle }}</li>
+              </ol>
+            </nav>
+          </div>
+        </div>
+      </div>
+      <!-- Breadcrumb End -->
       
       <!-- Demo Content -->
       <!-- <h2 class="display-4 text-dark">Bootstrap Vertical Nav</h2>

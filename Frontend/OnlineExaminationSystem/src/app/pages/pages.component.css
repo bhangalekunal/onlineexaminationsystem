@@ -43,7 +43,8 @@ body{
 }
 
 
-
+.breadcrumb .breadcrumb-item + .breadcrumb-item::before {
+    content: none; }
 
 
 @media(max-width:768px)
