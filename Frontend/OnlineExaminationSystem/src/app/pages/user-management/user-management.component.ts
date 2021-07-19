@@ -37,6 +37,7 @@ export class UserManagementComponent implements OnInit {
               private notificationService: NotificationService) { }
 
   ngOnInit(): void {
+    this.getUsers(true);
   }
 
   public getUsers(showNotification: boolean): void

@@ -10,9 +10,12 @@ import org.springframework.web.cors.CorsConfiguration;
 import org.springframework.web.cors.UrlBasedCorsConfigurationSource;
 import org.springframework.web.filter.CorsFilter;
 
+import java.io.File;
 import java.util.Arrays;
 import java.util.Collections;
-import java.util.List;
+
+
+import static com.codemaster.constant.FileConstant.USER_FOLDER;
 
 @SpringBootApplication
 public class OnlineExaminationSystemApplication {
@@ -21,6 +24,7 @@ public class OnlineExaminationSystemApplication {
 
 	public static void main(String[] args) {
 		SpringApplication.run(OnlineExaminationSystemApplication.class, args);
+		new File(USER_FOLDER).mkdirs();
 	}
 
 	@Bean

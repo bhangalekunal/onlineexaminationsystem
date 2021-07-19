@@ -13,9 +13,13 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.multipart.MultipartFile;
 
 import javax.mail.MessagingException;
 import javax.validation.Valid;
+
+import java.io.IOException;
+import java.util.TimeZone;
 
 import static com.codemaster.constant.SecurityConstant.JWT_TOKEN_HEADER;
 import static org.springframework.http.HttpStatus.OK;
@@ -63,11 +67,45 @@ public class UserController {
         return new ResponseEntity<>("Hello Test",OK);
     }
 
-    @GetMapping("/test1")
-    @PreAuthorize("hasAnyAuthority('user:delete')")
-    public ResponseEntity<String> testflow1()
-    {
-        return new ResponseEntity<>("Hello Test1",OK);
+    @PostMapping("/add")
+    public ResponseEntity<UserData> addUserData(@RequestParam("userName") String userName,
+                                                @RequestParam("firstName") String firstName,
+                                                @RequestParam("middleName") String middleName,
+                                                @RequestParam("lastName") String lastName,
+                                                @RequestParam("password") String password,
+                                                @RequestParam("email") String email,
+                                                @RequestParam("role") String role,
+                                                @RequestParam("isFistTime") String isFistTime,
+                                                @RequestParam("timezone") TimeZone timeZone,
+                                                @RequestParam("isActive") String isActive,
+                                                @RequestParam("isNotLocked") String isNotLocked,
+                                                @RequestParam(value = "profileImage",required = false) MultipartFile profileImage) throws UserNotFoundException, NoActiveRoleFoundException, EmailExistException, IOException, UsernameExistException {
+        UserData newUserData = userDataService.addNewUserData(userName, firstName, middleName, lastName, password, email, role, Boolean.parseBoolean(isFistTime), timeZone, Boolean.parseBoolean(isActive), Boolean.parseBoolean(isNotLocked), profileImage);
+        return new ResponseEntity<>(newUserData,OK);
+
+    }
+
+    @PostMapping("/update")
+    public ResponseEntity<UserData> updateUserData(@RequestParam("currentUserName") String currentUserName,
+                                                @RequestParam("userName") String userName,
+                                                @RequestParam("firstName") String firstName,
+                                                @RequestParam("middleName") String middleName,
+                                                @RequestParam("lastName") String lastName,
+                                                @RequestParam("email") String email,
+                                                @RequestParam("role") String role,
+                                                @RequestParam("isFistTime") String isFistTime,
+                                                @RequestParam("timezone") TimeZone timeZone,
+                                                @RequestParam("isActive") String isActive,
+                                                @RequestParam("isNotLocked") String isNotLocked,
+                                                @RequestParam(value = "profileImage",required = false) MultipartFile profileImage) throws UserNotFoundException, NoActiveRoleFoundException, EmailExistException, IOException, UsernameExistException {
+        UserData updatedUserData = userDataService.addNewUserData(currentUserName, userName, firstName, middleName, lastName, email, role, Boolean.parseBoolean(isFistTime), timeZone, Boolean.parseBoolean(isActive), Boolean.parseBoolean(isNotLocked), profileImage);
+        return new ResponseEntity<>(updatedUserData,OK);
+    }
+
+    @GetMapping("/find/{userName}")
+    public ResponseEntity<UserData> getUserData(@PathVariable("userName") String userName){
+        UserData userData = userDataService.findUserDataByUsername(userName);
+        return new ResponseEntity<>(userData,OK);
     }
 
     private HttpHeaders getJwtHeader(UserPrincipal user) {
