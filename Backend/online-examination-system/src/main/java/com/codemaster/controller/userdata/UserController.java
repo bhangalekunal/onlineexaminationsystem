@@ -1,6 +1,9 @@
 package com.codemaster.controller.userdata;
 
+import com.codemaster.entity.httpresponse.HttpResponse;
 import com.codemaster.entity.nonpersistance.AuthRequest;
+
+import com.codemaster.entity.nonpersistance.ResetPasswordRequest;
 import com.codemaster.entity.userdata.UserData;
 import com.codemaster.entity.userprinciple.UserPrincipal;
 import com.codemaster.exceptionhandler.domain.*;
@@ -8,6 +11,10 @@ import com.codemaster.service.userdata.UserDataService;
 import com.codemaster.utility.JWTTokenProvider;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpHeaders;
+import org.springframework.http.HttpStatus;
+
+import static com.codemaster.constant.FileConstant.*;
+import static org.springframework.http.MediaType.*;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.security.authentication.AuthenticationManager;
@@ -18,15 +25,24 @@ import org.springframework.web.multipart.MultipartFile;
 import javax.mail.MessagingException;
 import javax.validation.Valid;
 
+import java.io.ByteArrayOutputStream;
 import java.io.IOException;
+import java.io.InputStream;
+import java.net.URL;
+import java.nio.file.Files;
+import java.nio.file.Paths;
+import java.util.List;
 import java.util.TimeZone;
 
 import static com.codemaster.constant.SecurityConstant.JWT_TOKEN_HEADER;
+import static org.springframework.http.HttpStatus.NO_CONTENT;
 import static org.springframework.http.HttpStatus.OK;
 
 @RestController
 @RequestMapping("/api/user")
 public class UserController {
+    public static final String EMAIL_SENT = "An email with new Password was sent to: ";
+    public static final String USER_DATA_DELETED_SUCCESSFULLY = "UserData deleted successfully";
     private AuthenticationManager authenticationManager;
     private UserDataService userDataService;
     private JWTTokenProvider jwtTokenProvider;
@@ -107,6 +123,55 @@ public class UserController {
         UserData userData = userDataService.findUserDataByUsername(userName);
         return new ResponseEntity<>(userData,OK);
     }
+
+    @GetMapping("/list")
+    public ResponseEntity<List<UserData>> getAllUserData(){
+        List<UserData> userDataList = userDataService.getAllUserData();
+        return new ResponseEntity<>(userDataList,OK);
+    }
+
+    @GetMapping("/resetPassword")
+    public ResponseEntity<HttpResponse> resetPassword(@RequestBody ResetPasswordRequest resetPasswordRequest) throws EmailNotFoundException, MessagingException {
+        userDataService.resetPassword(resetPasswordRequest.getEmail(),resetPasswordRequest.getPassword());
+        return response(OK, EMAIL_SENT + resetPasswordRequest.getEmail());
+    }
+
+    @DeleteMapping("/delete/{userName}")
+    public ResponseEntity<HttpResponse> deleteUserData(@PathVariable("userName") String userName){
+        userDataService.deleteUserData(userName);
+        return response(NO_CONTENT, USER_DATA_DELETED_SUCCESSFULLY);
+    }
+
+    @PostMapping("/updateProfileImage")
+    public ResponseEntity<UserData> updateProfileImage(@RequestParam("userName") String userName, @RequestParam(value = "profileImage",required = false) MultipartFile profileImage) throws UserNotFoundException, EmailExistException, IOException, UsernameExistException {
+        UserData userData = userDataService.updateProfileImage(userName,profileImage);
+        return new ResponseEntity<>(userData,OK);
+    }
+
+    @GetMapping(path = "/image/{userName}/{fileName}", produces = IMAGE_JPEG_VALUE)
+    public byte[] getProfileImage(@PathVariable("userName") String userName,@PathVariable("fileName") String fileName) throws IOException {
+        return Files.readAllBytes(Paths.get(USER_FOLDER + userName + FORWARD_SLASH + fileName));
+    }
+
+    @GetMapping(path = "/image/profile/{userName}", produces = IMAGE_JPEG_VALUE)
+    public byte[] getTempProfileImage(@PathVariable("userName") String userName) throws IOException {
+        URL url = new URL(TEMP_PROFILE_IMAGE_BASE_URL + userName);
+        ByteArrayOutputStream byteArrayOutputStream = new ByteArrayOutputStream();
+        try(InputStream inputStream = url.openStream()){
+            int bytesRead;
+            byte[] chunk = new byte[1024];
+            while ((bytesRead = inputStream.read(chunk)) > 0){
+                byteArrayOutputStream.write(chunk, 0, bytesRead);
+            }
+        }
+        return byteArrayOutputStream.toByteArray();
+    }
+
+    private ResponseEntity<HttpResponse> response(HttpStatus httpStatus, String message) {
+        HttpResponse httpResponse = new HttpResponse(httpStatus.value(), httpStatus ,httpStatus.getReasonPhrase().toUpperCase(), message);
+        return new ResponseEntity<>(httpResponse,httpStatus);
+    }
+
 
     private HttpHeaders getJwtHeader(UserPrincipal user) {
         HttpHeaders headers = new HttpHeaders();
